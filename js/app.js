@@ -43,23 +43,24 @@ var Building = function(data) {
 };
 
 var viewModel = function() {
+    var self = this;
 //Julia Morgan
 
-    this.intro = ko.observable(info.intro);
+    self.intro = ko.observable(info.intro);
 
-    this.name = ko.observable(info.name);
+    self.name = ko.observable(info.name);
 
-    this.title = ko.observable(info.title);
+    self.title = ko.observable(info.title);
 
-    this.nameandtitle = ko.computed(function(){
-        return this.name() + ", " + this.title();
-    }, this);
+    self.nameandtitle = ko.computed(function(){
+        return self.name() + ", " + self.title();
+    }, self);
 
 // Buildings
 
-this.buildingList = ko.observableArray([]);
+    self.buildingList = ko.observableArray([]);
 
-buildings.forEach(function(buildingItem) {
+    initialBuildings.forEach(function(buildingItem) {
          self.buildingList.push( new Building(buildingItem) );
  });
 

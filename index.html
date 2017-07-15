@@ -24,8 +24,8 @@
 
      <div class = "buildings">
         <h2>Buildings</h2>
-        <ul data-bind = "foreach: buildingList">
-            <li data-bind = "text: $data"></li>
+        <ul data-bind = "foreach: initialBuildings">
+            <a data-bind ="text: wikiLink" ><li data-bind = "text: name"></li></a>
         </ul>
     </div> <!-- end buildings-->
 
