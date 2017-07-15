@@ -14,22 +14,39 @@ var info = {
 // Info about Buildings drawn fully or partially by Julia Morgan
 var initialBuildings = [
     { name: "Hearst Castle",
-      address: "123 Pivot Drive",
+      address: "Hearst Castle Road, San Simeon, CA",
       imgSrc: "http://via.placeholder.com/350x150",
       wikiLink: "http://www.example.com",
-      description: ["Description of", "Hearst Castle"]
+      description: ["Description of", "Hearst Castle"],
+      website :"hearstcastle.org"
     },
-    { name: "Colby House, Berkeley",
-      address: "123 Pivot Drive",
+    { name: "Fairmont Hotel, San Francisco",
+      address: "900 North Point St D100, San Francisco, CA 94109",
       imgSrc: "http://via.placeholder.com/350x150",
       wikiLink: "http://www.example.com",
-      description: ["Description of", "Colby House"]
+      description: ["Description of", "Fairmont Hotel"],
+      website :"fairmont.com"
     },
-    { name: "Derge House, Berkeley",
+    { name: "El Campanil",
       address: "123 Pivot Drive",
       imgSrc: "http://via.placeholder.com/350x150",
       wikiLink: "http://www.example.com",
-      description: ["Description of", "Derge House"]
+      description: ["Description of", "El Campanil, the bell tower"],
+      website :"mills.edu"
+    },
+    { name: "Chapel of the Chimes",
+      address: "4499 Piedmont Ave, Oakland, CA 94611",
+      imgSrc: "http://via.placeholder.com/350x150",
+      wikiLink: "http://www.example.com",
+      description: ["Description of", "Chapel of the Chimes"],
+      website :"oakland.chapelofthechimes.com"
+    },
+    { name: "Girton Hall",
+      address: "Berkeley, CA 94720",
+      imgSrc: "http://via.placeholder.com/350x150",
+      wikiLink: "http://www.example.com",
+      description: ["Description of", "Girton Hall"],
+      website :""
     }
 ];
 
