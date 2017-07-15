@@ -10,13 +10,17 @@
 </head>
 
 <body>
-
     <div class="intoduction">
         <h1 data-bind = "text: nameandtitle"></h1>
         <div data-bind = "foreach: intro">
             <p data-bind = "text: $data"></p>
         </div>
     </div> <!--end introduction-->
+     <div class = "buildings">
+        <ul data-bind = "foreach: listofbuildings">
+            <li data-bind = "text: $data"></li>
+        </ul>
+    </div> <!-- end buildings-->
 <hr>
 <h2>JSON details</h2>
 <span id = "details"></span>
