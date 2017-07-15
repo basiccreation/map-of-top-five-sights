@@ -1,7 +1,7 @@
 //Neighborhood Map
 
 "use strict";
-
+// Info about Julian Morgan
 var info = {
   intro: ["In 1904, Julia Morgan became the first woman licensed to practice architecture in California. A successful and prolific architect during the first half of the twentieth century, Morgan was born in San Francisco in 1872 and educated at the University of California at Berkeley and L’École des Beaux-Arts in Paris.",
           "Her trailblazing career helped open the field of architecture to women in the United States. Today she is perhaps best known for the design and construction of publisher W.R. Hearst’s legendary California coastal estate. Yet she was much more than the architect of San Simeon.",
@@ -11,8 +11,40 @@ var info = {
   imgSrc: 'img/xxx.jpg'
 };
 
+// Info about Buildings drawn fully or partially by Julia Morgan
+var initialBuildings = [
+    { name: "Hearst Castle",
+      address: "123 Pivot Drive",
+      imgSrc: "http://via.placeholder.com/350x150",
+      wikiLink: "http://www.example.com",
+      description: ["Description of", "Hearst Castle"]
+    },
+    { name: "Colby House, Berkeley",
+      address: "123 Pivot Drive",
+      imgSrc: "http://via.placeholder.com/350x150",
+      wikiLink: "http://www.example.com",
+      description: ["Description of", "Colby House"]
+    },
+    { name: "Derge House, Berkeley",
+      address: "123 Pivot Drive",
+      imgSrc: "http://via.placeholder.com/350x150",
+      wikiLink: "http://www.example.com",
+      description: ["Description of", "Derge House"]
+    }
+];
+
+var Building = function(data) {
+    this.name = ko.observable(data.name);
+    this.address = ko.observable(data.address);
+    this.imgSrc = ko.observable(data.imgSrc);
+    this.wikiLink = ko.observable(data.wikiLink);
+    this.description = ko.observableArray(data.description);
+
+};
 
 var viewModel = function() {
+//Julia Morgan
+
     this.intro = ko.observable(info.intro);
 
     this.name = ko.observable(info.name);
@@ -22,6 +54,21 @@ var viewModel = function() {
     this.nameandtitle = ko.computed(function(){
         return this.name() + ", " + this.title();
     }, this);
+
+// Buildings
+
+this.buildingList = ko.observableArray([]);
+
+buildings.forEach(function(buildingItem) {
+         self.buildingList.push( new Building(buildingItem) );
+ });
+
+ //   this.currentBuilding = ko.observable( this.buildingList()[0]);
+
+    // this.selection = function(selected) {
+    //   self.currentBuilding(selected);
+    // };
+
 };
 
 ko.applyBindings(new viewModel());
