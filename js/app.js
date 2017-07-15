@@ -82,11 +82,12 @@ var viewModel = function() {
          self.buildingList.push( new Building(buildingItem) );
  });
 
- //   this.currentBuilding = ko.observable( this.buildingList()[0]);
+this.currentBuilding = ko.observable( this.buildingList()[0]);
 
-    // this.selection = function(selected) {
-    //   self.currentBuilding(selected);
-    // };
+    this.selection = function(selected) {
+      self.currentBuilding(selected);
+    };
+
 
 };
 

@@ -17,22 +17,34 @@
         </div>
     </div> <!--end introduction-->
 
-
-
-
-
-
-     <div class = "buildings">
+    <div class = "buildings">
         <h2>Buildings</h2>
-        <ul data-bind = "foreach: initialBuildings">
-            <a data-bind="attr: {href: wikiLink, title: name }">
-                <li data-bind = "text: name">
-                </li>
-            </a>
-
+        <ul data-bind = "foreach: buildingList">
+            <li data-bind = "text: name, click: $parent.selection"></li>
         </ul>
     </div> <!-- end buildings-->
 
+    <div id="building_presentation" data-bind="with: currentBuilding">
+        <table width="100%">
+            <tr>
+                <td width="33%">
+                    <h2 data-bind="text: name"></h2>
+                    <p data-bind="text: address"></p>
+                    <a data-bind="attr: {href: wikiLink, title: name }">
+                    Link to Wikipedia</a>
+                </td>
+                <td>
+                    <h3>Description of <span data-bind="text: name"></span></h3>
+                    <span data-bind="foreach: description">
+                        <p data-bind="text: $data"></p>
+                    </span>
+                </td>
+                <td>
+                    <img width="350 px" src="" alt="Julia Morgan House" data-bind="attr: {src: imgSrc}">
+                </td>
+            </tr>
+        </table>
+    </div> <!-- end building_presentation
 
 
 
