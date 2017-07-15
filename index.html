@@ -1,25 +1,30 @@
+<!--Neighborhood Map-->
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <title>Julia Morgan's Legacy</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
-    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
-
-    <script type='text/javascript' src="javascript/main.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
 <body>
-<h1>Julia Morgan, Architect and Trail Blazer</h1>
-<p class = "intro" data-bind="text: introduction"></p>
-<h2>test</h2>
-<p class = "test"></p>
+<h1 data-bind = "text: nameandtitle">&&<span data-bind = "text: name"></span>, <span data-bind = "text: title"></span>
+</h1>
+<div data-bind = "foreach: intro">
+<p data-bind = "text: $data"></p>
+</div>
 <hr>
 <h2>JSON details</h2>
 <span id = "details"></span>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!--integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+-->
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script type='text/javascript' src="js/app.js"></script>
+
 </body>
 
 </html>
