@@ -1,6 +1,5 @@
 To do list
-- Julia Morgan introduction (https://www.bluffton.edu/homepages/facstaff/sullivanm/jmberkhses/intro.html)
-    - web scrape
++ Julia Morgan introduction (https://www.bluffton.edu/homepages/facstaff/sullivanm/jmberkhses/intro.html)
 - Map with min five house locations (Google Maps)
     - API
     - List of buildings (https://www.bluffton.edu/homepages/facstaff/sullivanm/jmindex/genericindex.html)

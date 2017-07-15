@@ -56,6 +56,7 @@ var Building = function(data) {
     this.imgSrc = ko.observable(data.imgSrc);
     this.wikiLink = ko.observable(data.wikiLink);
     this.description = ko.observableArray(data.description);
+    this.website = ko.observable(data.website);
 
 };
 
