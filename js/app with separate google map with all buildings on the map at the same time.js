@@ -20,7 +20,7 @@ var initialBuildings = [{
     wikiLink: "http://www.example.com",
     description: ["Description of", "Hearst Castle"],
     website: "hearstcastle.org",
-    location: { lat: 35.6852, lng: -121.1682 }
+    location: { lat: 37.8413549, lng: -120.9632393 }
 }, {
     name: "Fairmont Hotel, San Francisco",
     address: "900 North Point St D100, San Francisco, CA 94109",
@@ -28,15 +28,15 @@ var initialBuildings = [{
     wikiLink: "http://www.example.com",
     description: ["Description of", "Fairmont Hotel"],
     website: "fairmont.com",
-    location: { lat: 37.802465, lng: -122.44591 }
+    location: { lat: 37.7444883, lng: -121.2949465 }
 }, {
     name: "El Campanil",
-    address: "602 W 2nd St, Antioch, CA 94509",
+    address: "123 Pivot Drive",
     imgSrc: "http://via.placeholder.com/350x150",
     wikiLink: "http://www.example.com",
     description: ["Description of", "El Campanil, the bell tower"],
     website: "mills.edu",
-    location: { lat: 38.0170, lng: -121.8141 }
+    location: { lat: 37.5347062, lng: -120.4895759 }
 }, {
     name: "Chapel of the Chimes",
     address: "4499 Piedmont Ave, Oakland, CA 94611",
@@ -44,7 +44,7 @@ var initialBuildings = [{
     wikiLink: "http://www.example.com",
     description: ["Description of", "Chapel of the Chimes"],
     website: "oakland.chapelofthechimes.com",
-    location: { lat: 37.8391, lng: -122.2456 }
+    location: { lat: 37.55281777, lng: -121.684377 }
 }, {
     name: "Girton Hall",
     address: "Berkeley, CA 94720",
@@ -52,7 +52,7 @@ var initialBuildings = [{
     wikiLink: "http://www.example.com",
     description: ["Description of", "Girton Hall"],
     website: "",
-    location: { lat: 37.8724, lng: -122.2542 }
+    location: { lat: 37.6180628, lng: -121.61237 }
 }];
 
 var Building = function(data) {
@@ -62,8 +62,9 @@ var Building = function(data) {
     this.wikiLink = ko.observable(data.wikiLink);
     this.description = ko.observableArray(data.description);
     this.website = ko.observable(data.website);
-};
+    this.marker = ko.observable(null);
 
+};
 
 var viewModel = function() {
     var self = this;
@@ -83,8 +84,6 @@ var viewModel = function() {
     //create building array
     self.buildingList = ko.observableArray([]);
 
-
-
     //populate bulidings array
     initialBuildings.forEach(function(buildingItem) {
         self.buildingList.push(new Building(buildingItem));
@@ -97,7 +96,6 @@ var viewModel = function() {
     this.selection = function(selected) {
         self.currentBuilding(selected);
     };
-
 };
 
 ko.applyBindings(new viewModel());
@@ -136,12 +134,13 @@ function initMap() {
             id: i
 
         });
+        var chosen =
 
             // Push the marker to our array of markers.
             markers.push(marker);
 
         // // Create an onclick event to open an infowindow at each marker.
-        marker.addListener('mouseover', function() {
+        marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
             //Change the marker color
         });
@@ -160,12 +159,14 @@ function populateInfoWindow(marker, infowindow) {
     if (infowindow.marker != marker) {
         infowindow.marker = marker;
         infowindow.setContent('<h2 >' + marker.name + '</h2>');
+        marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
         infowindow.open(map, marker);
 
         // Clears marker property when infowindow is closed.
-        infowindow.addListener('mouseout', function() {
+        infowindow.addListener('closeclick', function() {
             infowindow.setMarker = null;
             marker.setIcon('https://www.google.com/mapfiles/marker.png');
+
         });
     }
 }
