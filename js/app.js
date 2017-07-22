@@ -3,12 +3,7 @@
 "use strict";
 
 // var Building = function(data) {
-//     this.name = ko.observable(data.name);
-//     this.address = ko.observable(data.address);
-//     this.imgSrc = ko.observable(data.imgSrc);
-//     this.wikiLink = ko.observable(data.wikiLink);
 //     this.description = ko.observableArray(data.description);
-//     this.website = ko.observable(data.website);
 // };
 
 var info = {
@@ -41,11 +36,16 @@ var subjectViewModel = function() {
 // Buildings
 
 
-function Building(name, address, website) {
+function Building(name, address, website, imgSrc, wikiLink, description, location) {
     var that = this;
     that.name = ko.observable(name);
     that.address = ko.observable(address);
     that.website = ko.observable(website);
+    that.imgSrc = ko.observable(imgSrc);
+    that.wikiLink = ko.observable(wikiLink);
+    that.description = ko.observableArray(description);
+    that.location = ko.observable(location);
+
 };
 
 
@@ -77,7 +77,7 @@ viewModel.filteredItems = ko.dependentObservable(function() {
 }, viewModel);
 
 //a JSON string that we got from the server that wasn't automatically converted to an object
-var listOfBuildings = '[{"name":"Peach House","address":"34 Fruits Lane","website":"233.com"},{"name":"Plum Castle","address":"45 Fruits Lane","website":"75.com"},{"name":"Donut cottage","address":" 234 Bread Alley","website":"15.us"},{"name":"Milky Way","address":"90 Dairy Drive","website":"450.com"}]';
+var listOfBuildings = '[{"name":"Peach House","address":"34 Fruits Lane","website":"233.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Plum Castle","address":"45 Fruits Lane","website":"75.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Donut cottage","address":" 234 Bread Alley","website":"15.us","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Milky Way","address":"90 Dairy Drive","website":"450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Mars Mansion","address":"890 Fairy Extension","website":"33450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]}]';
 
 
 //parse into an object fruit
@@ -86,9 +86,9 @@ var buildingsJSONtoObject = ko.utils.parseJson(listOfBuildings);
 
 //do some basic mapping (without mapping plugin)
 var mappedData = ko.utils.arrayMap(buildingsJSONtoObject, function(item) {
-    return new Building(item.name, item.address, item.website);
+    return new Building(item.name, item.address, item.website, item.imgSrc, item.wikiLink, item.description, item.location);
 });
-//for fruit
+
 viewModel.buildings(mappedData);
 
 ko.applyBindings(viewModel, document.getElementById('listOfBuildings'));
