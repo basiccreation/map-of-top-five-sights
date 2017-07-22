@@ -53,6 +53,7 @@ var viewModel = {
     buildings: ko.observableArray([]),
     filter: ko.observable(""),
     search: ko.observable(""),
+
 };
 
 //ko.utils.arrayFilter - filter the buildings using the filter text
@@ -92,7 +93,7 @@ var mappedData = ko.utils.arrayMap(buildingsJSONtoObject, function(item) {
 viewModel.buildings(mappedData);
 
 ko.applyBindings(viewModel, document.getElementById('listOfBuildings'));
-ko.applyBindings(new subjectViewModel, document.getElementById('intoduction'));
+ko.applyBindings(new subjectViewModel, document.getElementById('introduction'));
 
 
 //MAP
