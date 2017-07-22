@@ -10,14 +10,16 @@
 </head>
 
 <body>
- <!--   <div class="intoduction">
-        <h1 data-bind = "text: nameandtitle"></h1>
-        <div data-bind = "foreach: intro">
-            <p data-bind = "text: $data"></p>
-        </div>
+
+<div class="intoduction">
+ <h1 data-bind = "text: nameandtitle"></h1>
+  <div data-bind = "foreach: intro">
+    <p data-bind = "text: $data"></p>
+  </div>
     </div> <!--end introduction-->
 
 <hr />
+<div id = "listOfBuildings">
 <h3>Name</h3>
 <div data-bind="template: { name: 'itemsTmpl', foreach: filteredItems }"></div>
 <script id="itemsTmpl" type="text/html">
@@ -28,8 +30,9 @@
 <p>Filter:
   <input data-bind="value: filter, valueUpdate: 'afterkeydown'" />
 </p>
+    </div> <!-- end buildings-->
 <hr>
- <!-- end buildings-->
+
 <!--
     <div id="building_presentation" data-bind = "with: currentBuilding">
         <table width="100%">
@@ -62,12 +65,23 @@
 <span id = "details"></span>
     crossorigin="anonymous"></script>
 -->
+
+    <!--Dependencies-->
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"></script>
+    <script type='text/javascript' src="js/app.js"></script>
+    <script type="text/javascript" src="lib/jquery.livequery.js"></script>
+
 <!--integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 -->
-    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"><script
-    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
-    <script type='text/javascript' src="js/app.js"></script>
+
+<!--JAVASCRIPT ARREYS-->
+    <script type='text/javascript' src="js/buildings.js"></script>
+    <script type='text/javascript' src="js/persondetails.js"></script>
+
+    <!--Plugin-->
+    <script type="text/javascript" src="lib/knockout.multimodels-0.1.min.js"></script>
 <!--    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3bLgW65HcS0cTzwUYm6S9DdyhaE0xze0&v=3&callback=initMap"></script>
 -->
 </body>

@@ -7,3 +7,10 @@ To do list
     API
 - Links to books about Julia (Google Books)
     - API
+
+
+help with filter
+    http://jsfiddle.net/pips/n5b52kr1/15/
+
+help with multiple views
+    https://groups.google.com/forum/#!searchin/knockoutjs/multiple$20viewmodels$20%7Csort:relevance/knockoutjs/s7RdSCixyiI/5yW77jjmX2UJ
