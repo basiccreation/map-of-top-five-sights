@@ -49,7 +49,6 @@ var viewModel = {
     buildings: ko.observableArray([]),
     filter: ko.observable(""),
     search: ko.observable(""),
-    currentBuilding: ko.observable("")
 };
 
 //ko.utils.arrayFilter - filter the buildings using the filter text
@@ -75,7 +74,6 @@ viewModel.filteredItems = ko.dependentObservable(function() {
 
 // //a JSON string of buildings
  var list_Of_Buildings = '[{"name":"Peach House","address":"34 Fruits Lane","website":"233.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Plum Castle","address":"45 Fruits Lane","website":"75.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Donut cottage","address":" 234 Bread Alley","website":"15.us","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Milky Way","address":"90 Dairy Drive","website":"450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Mars Mansion","address":"890 Fairy Extension","website":"33450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]}]';
- var listOfBuildings2 = [{"name":"Peach House","address":"34 Fruits Lane","website":"233.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Plum Castle","address":"45 Fruits Lane","website":"75.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Donut cottage","address":" 234 Bread Alley","website":"15.us","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Milky Way","address":"90 Dairy Drive","website":"450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Mars Mansion","address":"890 Fairy Extension","website":"33450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]}];
 
 //parse into an object
 var buildingsJSONtoObject = ko.utils.parseJson(list_Of_Buildings);
@@ -93,7 +91,7 @@ var buildingViewModel = function() {
     self.buildingList = ko.observableArray([]);
 
     //populate buildings array
-    listOfBuildings2.forEach(function(buildingItem) {
+    buildingsJSONtoObject.forEach(function(buildingItem) {
         self.buildingList.push(new Building2(buildingItem));
     });
 
