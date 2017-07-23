@@ -2,10 +2,6 @@
 
 "use strict";
 
-// var Building = function(data) {
-//     this.description = ko.observableArray(data.description);
-// };
-
 var info = {
     intro: ["In 1904, Julia Morgan became the first woman licensed to practice architecture in California. A successful and prolific architect during the first half of the twentieth century, Morgan was born in San Francisco in 1872 and educated at the University of California at Berkeley and L’École des Beaux-Arts in Paris.",
         "Her trailblazing career helped open the field of architecture to women in the United States. Today she is perhaps best known for the design and construction of publisher W.R. Hearst’s legendary California coastal estate. Yet she was much more than the architect of San Simeon.",
@@ -20,21 +16,23 @@ var subjectViewModel = function() {
     var self = this;
     //Julia Morgan
     self.intro = ko.observable(info.intro);
-
     self.name = ko.observable(info.name);
-
     self.title = ko.observable(info.title);
-
     self.nameandtitle = ko.computed(function() {
         return self.name() + ", " + self.title();
     }, self);
 
 };
-
-
-
 // Buildings
 
+var Building2 = function(data) {
+    this.name = ko.observable(data.name);
+    this.address = ko.observable(data.address);
+    this.imgSrc = ko.observable(data.imgSrc);
+    this.wikiLink = ko.observable(data.wikiLink);
+    this.description = ko.observableArray(data.description);
+    this.website = ko.observable(data.website);
+};
 
 function Building(name, address, website, imgSrc, wikiLink, description, location) {
     var that = this;
@@ -45,15 +43,13 @@ function Building(name, address, website, imgSrc, wikiLink, description, locatio
     that.wikiLink = ko.observable(wikiLink);
     that.description = ko.observableArray(description);
     that.location = ko.observable(location);
-
 };
-
 
 var viewModel = {
     buildings: ko.observableArray([]),
     filter: ko.observable(""),
     search: ko.observable(""),
-
+    currentBuilding: ko.observable("")
 };
 
 //ko.utils.arrayFilter - filter the buildings using the filter text
@@ -77,24 +73,44 @@ viewModel.filteredItems = ko.dependentObservable(function() {
     }
 }, viewModel);
 
-//a JSON string that we got from the server that wasn't automatically converted to an object
-var listOfBuildings = '[{"name":"Peach House","address":"34 Fruits Lane","website":"233.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Plum Castle","address":"45 Fruits Lane","website":"75.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Donut cottage","address":" 234 Bread Alley","website":"15.us","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Milky Way","address":"90 Dairy Drive","website":"450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Mars Mansion","address":"890 Fairy Extension","website":"33450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]}]';
+// //a JSON string of buildings
+ var list_Of_Buildings = '[{"name":"Peach House","address":"34 Fruits Lane","website":"233.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Plum Castle","address":"45 Fruits Lane","website":"75.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Donut cottage","address":" 234 Bread Alley","website":"15.us","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Milky Way","address":"90 Dairy Drive","website":"450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Mars Mansion","address":"890 Fairy Extension","website":"33450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]}]';
+ var listOfBuildings2 = [{"name":"Peach House","address":"34 Fruits Lane","website":"233.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Plum Castle","address":"45 Fruits Lane","website":"75.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Donut cottage","address":" 234 Bread Alley","website":"15.us","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Milky Way","address":"90 Dairy Drive","website":"450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]},{"name":"Mars Mansion","address":"890 Fairy Extension","website":"33450.com","imgSrc":"photo.jpg","wikiLink":"wiki.org","description":["heres a desc"]}];
 
-
-//parse into an object fruit
-var buildingsJSONtoObject = ko.utils.parseJson(listOfBuildings);
-
+//parse into an object
+var buildingsJSONtoObject = ko.utils.parseJson(list_Of_Buildings);
 
 //do some basic mapping (without mapping plugin)
 var mappedData = ko.utils.arrayMap(buildingsJSONtoObject, function(item) {
     return new Building(item.name, item.address, item.website, item.imgSrc, item.wikiLink, item.description, item.location);
 });
 
+var buildingViewModel = function() {
+    var self = this;
+
+    // BUILDINGS
+    //create building array
+    self.buildingList = ko.observableArray([]);
+
+    //populate buildings array
+    listOfBuildings2.forEach(function(buildingItem) {
+        self.buildingList.push(new Building2(buildingItem));
+    });
+
+    //sets current building
+    this.currentBuilding = ko.observable(this.buildingList()[0]);
+
+    //sets selection to current
+    this.selection = function(selected) {
+        self.currentBuilding(selected);
+    };
+}; // end buildingViewModel
+
 viewModel.buildings(mappedData);
 
-ko.applyBindings(viewModel, document.getElementById('listOfBuildings'));
-ko.applyBindings(new subjectViewModel, document.getElementById('introduction'));
-
+//ko.applyBindings(new subjectViewModel, document.getElementById('introduction'));
+//ko.applyBindings(viewModel, document.getElementById('listOfBuildings'));
+ko.applyBindings(new buildingViewModel, document.getElementById('buildingsection'));
 
 //MAP
 

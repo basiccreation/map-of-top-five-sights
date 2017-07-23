@@ -12,11 +12,11 @@
 <body>
 
 <div class="introduction">
- <h1 data-bind = "text: nameandtitle"></h1>
+  <h1 data-bind = "text: nameandtitle"></h1>
   <div data-bind = "foreach: intro">
     <p data-bind = "text: $data"></p>
   </div>
-    </div> <!--end introduction-->
+</div> <!--end introduction-->
 
 <hr />
 <div id = "listOfBuildings">
@@ -32,6 +32,14 @@
 </p>
     </div> <!-- end buildings-->
 <hr>
+<div id ="buildingsection">
+    <div class = "buildings">
+
+        <h2>Buildings</h2>
+        <ul data-bind = "foreach: buildingList">
+            <li data-bind = "text: name, click: $parent.selection"></li>
+        </ul>
+    </div> <!-- end buildings-->
 
     <div id="building_presentation" data-bind = "with: currentBuilding">
         <table width="100%">
@@ -54,16 +62,12 @@
             </tr>
         </table>
     </div> <!-- end building_presentation-->
+</div>
+    <hr>
 <!--
    <h2>Map</h2>
    <div id="map"></div>
    <!-- end map of buildings-->
-<!--
-<hr>
-<h2>JSON details</h2>
-<span id = "details"></span>
-    crossorigin="anonymous"></script>
--->
 
     <!--Dependencies-->
 
