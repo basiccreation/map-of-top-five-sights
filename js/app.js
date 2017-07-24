@@ -2,37 +2,10 @@
 
 "use strict";
 
-var info = {
-    intro: ["In 1904, Julia Morgan became the first woman licensed to practice architecture in California. A successful and prolific architect during the first half of the twentieth century, Morgan was born in San Francisco in 1872 and educated at the University of California at Berkeley and L’École des Beaux-Arts in Paris.",
-        "Her trailblazing career helped open the field of architecture to women in the United States. Today she is perhaps best known for the design and construction of publisher W.R. Hearst’s legendary California coastal estate. Yet she was much more than the architect of San Simeon.",
-        "She built a remarkably diverse practice, designing at least 700 buildings that are prized by owners and are now being rediscovered by architectural historians."
-    ],
-    name: 'Julia Morgan',
-    title: 'Architect and Trail Blazer',
-    imgSrc: 'img/xxx.jpg'
-};
 
-var subjectViewModel = function() {
-    var self = this;
-    //Julia Morgan
-    self.intro = ko.observable(info.intro);
-    self.name = ko.observable(info.name);
-    self.title = ko.observable(info.title);
-    self.nameandtitle = ko.computed(function() {
-        return self.name() + ", " + self.title();
-    }, self);
-
-};
 // Buildings
 
-var Building2 = function(data) {
-    this.name = ko.observable(data.name);
-    this.address = ko.observable(data.address);
-    this.imgSrc = ko.observable(data.imgSrc);
-    this.wikiLink = ko.observable(data.wikiLink);
-    this.description = ko.observableArray(data.description);
-    this.website = ko.observable(data.website);
-};
+
 
 function Building(name, address, website, imgSrc, wikiLink, description, location) {
     var that = this;
@@ -83,32 +56,10 @@ var mappedData = ko.utils.arrayMap(buildingsJSONtoObject, function(item) {
     return new Building(item.name, item.address, item.website, item.imgSrc, item.wikiLink, item.description, item.location);
 });
 
-var buildingViewModel = function() {
-    var self = this;
-
-    // BUILDINGS
-    //create building array
-    self.buildingList = ko.observableArray([]);
-
-    //populate buildings array
-    buildingsJSONtoObject.forEach(function(buildingItem) {
-        self.buildingList.push(new Building2(buildingItem));
-    });
-
-    //sets current building
-    this.currentBuilding = ko.observable(this.buildingList()[0]);
-
-    //sets selection to current
-    this.selection = function(selected) {
-        self.currentBuilding(selected);
-    };
-}; // end buildingViewModel
 
 viewModel.buildings(mappedData);
 
-//ko.applyBindings(new subjectViewModel, document.getElementById('introduction'));
-//ko.applyBindings(viewModel, document.getElementById('listOfBuildings'));
-ko.applyBindings(new buildingViewModel, document.getElementById('buildingsection'));
+ko.applyBindings(viewModel, document.getElementById('listOfBuildings'));
 
 //MAP
 
