@@ -11,7 +11,7 @@
 
 //Create new map
     function initMap() {
-        var initialPosition = {lat: 37.7413549, lng: -121.9980244 };
+        var initialPosition = {lat: 37.7413549, lng: -122.25};
         var map = new google.maps.Map(document.getElementById('map'), {
             center: initialPosition,
             zoom: 9
