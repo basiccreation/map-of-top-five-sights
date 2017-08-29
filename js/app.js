@@ -1,40 +1,89 @@
 //Neighborhood Map
 "use strict";
 
-//MAP
 
-// Create variable to hold map
-//var map;
-
-// Create a new blank array for all the listing markers.
-//var markers = [];
-
+//   //$("#articlesHeader").fadeIn();
+//   var searchTerm = document.getElementById("zipcode").value;
+// // google key AIzaSyDVXItUkHHslRJty9xzj4bxMtjTHzGQyc0
+//   var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=AIzaSyB3bLgW65HcS0cTzwUYm6S9DdyhaE0xze0";// + searchTerm;
+// $("searchButton").click(function(){
+//     $.getJSON(url, function(result){
+//         $("#details").html(JSON.stringify(result, null, 4));
+//         });
+//     });
+//-------------------------------------
 //Create new map
-    function initMap() {
-        var initialPosition = {lat: 37.7413549, lng: -122.25};
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: initialPosition,
-            zoom: 9
-        });
-        }
+// var map;
 
-      // function initMap() {
-      //   var uluru = {lat: -25.363, lng: 131.044};
-      //   var map = new google.maps.Map(document.getElementById('map'), {
-      //     zoom: 4,
-      //     center: uluru
-      //   });
-      //   var marker = new google.maps.Marker({
-      //     position: uluru,
-      //     map: map
-      //   });
-      // }
-// $.get(
-//    url,
-//    function(response) {
-//      $("#details").html(JSON.stringify(response.query.pages, null, 4));
-//      var result = response.query.pages;
-//     // $("#list").html(JSON.stringify(response.query.pages['435997'].revisions[0]['*'], null, 4));
-//    },
-//    "jsonp"
-//  );
+// function initMap() {
+//     var initialPosition = {lat: 37.7413549, lng: -122.25};
+//         map = new google.maps.Map(document.getElementById('map'), {
+//             center: initialPosition,
+//             zoom: 9
+//         });
+//     };
+
+
+var map;
+
+function initMap() {
+  var pyrmont = {lat: 37.7413549, lng: -122.25};
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: pyrmont,
+    zoom: 7
+  });
+
+  var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch({
+    location: pyrmont,
+    radius: 5000,
+    type: ['cafe']
+  }, processResults);
+}
+
+function processResults(results, status, pagination) {
+  if (status !== google.maps.places.PlacesServiceStatus.OK) {
+    return;
+  } else {
+    createMarkers(results);
+
+    if (pagination.hasNextPage) {
+      var moreButton = document.getElementById('more');
+
+      moreButton.disabled = false;
+
+      moreButton.addEventListener('click', function() {
+        moreButton.disabled = true;
+        pagination.nextPage();
+      });
+    }
+  }
+}
+
+function createMarkers(places) {
+  var bounds = new google.maps.LatLngBounds();
+  var placesList = document.getElementById('places');
+
+  for (var i = 0, place; place = places[i]; i++) {
+    var image = {
+      url: place.icon,
+      size: new google.maps.Size(71, 71),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(17, 34),
+      scaledSize: new google.maps.Size(25, 25)
+    };
+
+    var marker = new google.maps.Marker({
+      map: map,
+      icon: image,
+      title: place.name,
+      position: place.geometry.location
+    });
+
+    placesList.innerHTML += '<li>' + place.name + '</li>';
+
+    bounds.extend(place.geometry.location);
+  }
+  map.fitBounds(bounds);
+}
