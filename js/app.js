@@ -12,33 +12,26 @@
 //         });
 //     });
 //-------------------------------------
+
 //Create new map
-// var map;
-
-// function initMap() {
-//     var initialPosition = {lat: 37.7413549, lng: -122.25};
-//         map = new google.maps.Map(document.getElementById('map'), {
-//             center: initialPosition,
-//             zoom: 9
-//         });
-//     };
-
 
 var map;
 
 function initMap() {
-  var pyrmont = {lat: 37.7413549, lng: -122.25};
+  var initialPosition = {lat: 37.7413549, lng: -122.25};
 
   map = new google.maps.Map(document.getElementById('map'), {
-    center: pyrmont,
-    zoom: 7
+    center: initialPosition,
+    zoom: 17
   });
 
   var service = new google.maps.places.PlacesService(map);
   service.nearbySearch({
-    location: pyrmont,
+    location: initialPosition,
     radius: 5000,
-    type: ['cafe']
+    type: ['cafe'],
+    keyword: 'cafe',
+    openNow: true
   }, processResults);
 }
 
@@ -81,7 +74,7 @@ function createMarkers(places) {
       position: place.geometry.location
     });
 
-    placesList.innerHTML += '<li>' + place.name + '</li>';
+    placesList.innerHTML += '<li>' + place.name + place.opening_hours.close+'</li>';
 
     bounds.extend(place.geometry.location);
   }
