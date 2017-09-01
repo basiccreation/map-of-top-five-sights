@@ -74,7 +74,7 @@ function createMarkers(places) {
       position: place.geometry.location
     });
 
-    placesList.innerHTML += '<li>' + place.name + place.opening_hours.close+'</li>';
+    placesList.innerHTML += '<li>' + place.name + '</li>';
 
     bounds.extend(place.geometry.location);
   }
