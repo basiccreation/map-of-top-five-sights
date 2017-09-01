@@ -25,6 +25,11 @@ function initMap() {
     zoom: 17
   });
 
+          var marker = new google.maps.Marker({
+          position: initialPosition,
+          map: map
+        });
+
   var service = new google.maps.places.PlacesService(map);
   service.nearbySearch({
     location: initialPosition,
@@ -51,6 +56,7 @@ function processResults(results, status, pagination) {
         pagination.nextPage();
       });
     }
+    //TODO else hide more button
   }
 }
 
