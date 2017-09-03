@@ -9,105 +9,79 @@ var coffeeShop = function(data, self) {
     this.name = ko.observable(data)
 }
 
-var map;
-var markers;
-var service;
+var map = null;
+var cafeMarkers = [];
+var service = null;
 var infowindow = new google.maps.InfoWindow({size: new google.maps.Size(150,50)});
 
-function initMap() {
+      function initMap() {
+        var intialPosition = new google.maps.LatLng(37.8716, -122.2727);
 
-    var initialPosition = {lat: 37.8513549, lng: -122.25};
+        map = new google.maps.Map(document.getElementById('map'), {
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          center: intialPosition,
+          zoom: 17
+        });
 
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: initialPosition,
-        zoom: 17
-    });
+        service = new google.maps.places.PlacesService(map);
 
-    var service = new google.maps.places.PlacesService(map);
+        var request = {
+          location: intialPosition,
+          radius: 500,
+          types: ['cafe'],
+          name: 'cafe',
+          opennow: true
+        };
+        infowindow = new google.maps.InfoWindow();
+        service.nearbySearch(request, callback);
+      }
 
-    var marker = new google.maps.Marker({
-        position: initialPosition,
-        map: map
-    });
-
-    infowindow = new google.maps.InfoWindow();
-
-
-
-    service.textSearch({
-        location: initialPosition,
-        radius: 1000,
-        type: ['cafe'],
-        keyword: 'cafe',
-        openNow: true
-        }, processResults);
-
-    function callback(place, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-        createMarker(place);
+      function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
         }
-    }
-} // end initMap
+      }
 
-function processResults(results, status, pagination) {
-  if (status !== google.maps.places.PlacesServiceStatus.OK) {
-    return;
-  } else {
-    createMarkers(results);
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+    if (place.icon) {
+      var image = new google.maps.MarkerImage(
+                place.icon, new google.maps.Size(71, 71),
+                new google.maps.Point(0, 0), new google.maps.Point(17, 34),
+                new google.maps.Size(25, 25));
+     } else var image = null;
 
-    if (pagination.hasNextPage) {
-      var moreButton = document.getElementById('more');
-
-      moreButton.disabled = false;
-
-      moreButton.addEventListener('click', function() {
-        moreButton.disabled = true;
-        pagination.nextPage();
-      });
-    }
-    //TODO else hide more button
-  }
-} // end processResults
-
-function createMarkers(places) {
-  var bounds = new google.maps.LatLngBounds();
-  var placesList = document.getElementById('places');
-
-  for (var i = 0, place; place = places[i]; i++) {
-    var image = {
-      url: place.icon,
-      size: new google.maps.Size(71, 71),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(17, 34),
-      scaledSize: new google.maps.Size(25, 25)
+        var marker = new google.maps.Marker({
+          map: map,
+          icon: image,
+          position: place.geometry.location
+        });
+    var request =  {
+          reference: place.reference
     };
 
-    var marker = new google.maps.Marker({
-      map: map,
-      icon: image,
-      position: place.geometry.location,
-      animation: google.maps.Animation.DROP,
+    google.maps.event.addListener(marker,'click',function(){
+        service.getDetails(request, function(place, status) {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+            var contentStr = '<h5>'+place.name+'</h5><p>'+place.formatted_address;
+            if (!!place.formatted_phone_number) contentStr += '<br>'+place.formatted_phone_number;
+            if (!!place.website) contentStr += '<br><a target="_blank" href="'+place.website+'">'+place.website+'</a>';
+            contentStr += '<br>'+place.types+'</p>';
+            infowindow.setContent(contentStr);
+            infowindow.open(map,marker);
+          } else {
+            var contentStr = "<h5>No Result, status="+status+"</h5>";
+            infowindow.setContent(contentStr);
+            infowindow.open(map,marker);
+          }
+        });
+
     });
+    cafeMarkers.push(marker);
+     var side_bar_html = "<a href='javascript:google.maps.event.trigger(cafeMarkers["+parseInt(cafeMarkers.length-1)+"],\"click\");'>"+place.name+"</a><br>";
+     document.getElementById('side_bar').innerHTML += side_bar_html;
+}
 
-
-    // google.maps.event.addListener(marker, 'click', function() {
-    //   infowindow.setContent(place.name);
-    //   infowindow.open(map, this);
-    //   });
-
-    // Removes the markers from the map, but keeps them in the array.
-    function clearMarkers() {
-      setMapOnAll(null);
-    }
-
-    // Shows any markers currently in the array.
-    function showMarkers() {
-      setMapOnAll(map);
-    }
-
-    placesList.innerHTML += '<li>' + place.name + '</li>';
-
-    bounds.extend(place.geometry.location);
-  }
-  map.fitBounds(bounds);
-} // end createMarkers
+      google.maps.event.addDomListener(window, 'load', initMap);

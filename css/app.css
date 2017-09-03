@@ -5,24 +5,24 @@
         margin: 0;
         padding: 0;
       }
-      #right-panel {
+      #side_bar {
         font-family: 'Roboto','sans-serif';
         line-height: 30px;
         padding-left: 10px;
       }
 
-      #right-panel select, #right-panel input {
+      #side_bar select, #side_bar input {
         font-size: 15px;
       }
 
-      #right-panel select {
+      #side_bar select {
         width: 100%;
       }
 
-      #right-panel i {
+      #side_bar i {
         font-size: 12px;
       }
-      #right-panel {
+      #side_bar {
         font-family: Arial, Helvetica, sans-serif;
         position: absolute;
         right: 5px;
