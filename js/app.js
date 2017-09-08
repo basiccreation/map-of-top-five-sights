@@ -74,7 +74,6 @@ var initialLocations = [{
     }
 ];
 
-
 //Cafe Prototype
 var Cafe = function(data) {
     this.name = data.name;
@@ -86,7 +85,7 @@ var Cafe = function(data) {
 
 //Map and center of map
 var map;
-var intialPosition = {lat: 37.857, lng: -122.2527};
+var intialPosition = { lat: 37.857, lng: -122.2527 };
 
 //Map is visible on page with one marker at initial position
 function initMap() {
@@ -101,27 +100,26 @@ function initMap() {
         position: intialPosition,
         animation: google.maps.Animation.DROP
     });
-
 };
+
 //InfoWindow
-  var infowindow = new google.maps.InfoWindow({
+var infowindow = new google.maps.InfoWindow({
     content: contentString
-  });
+});
 
+// Bounds for map
+var bounds = new google.maps.LatLngBounds();
 
+// The viewmodel
+var cafeViewModel = function() {
+    var self = this;
 
+    // Array for all the cafes
+    this.cafeList = ko.observableArray([]);
+    //List of filtered cafes
+    this.filteredCafeList = ko.observable();
 
-
-//    infowindow = new google.maps.InfoWindow();
-
-//     var cafeViewModel = function() {
-//     var self = this;
-
-//     this.cafeList = ko.observableArray(cafeMarkers);
-//     this.name = ko.observable(cafeList.name)
-//     this.filteredCafeList = ko.observable;
-
-// }
+}
 
 //ko.applyBindings(new CafeViewModel());
 //google.maps.event.addDomListener(window, 'load', initMap);
