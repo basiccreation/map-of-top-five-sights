@@ -74,6 +74,7 @@ var initialLocations = [{
     }
 ];
 
+
 //Cafe Prototype
 var Cafe = function(data) {
     this.name = data.name;
@@ -83,13 +84,11 @@ var Cafe = function(data) {
     this.closehour = data.closehour;
 };
 
-//Map
-
+//Map and center of map
 var map;
 var intialPosition = {lat: 37.857, lng: -122.2527};
-//var infowindow = new google.maps.InfoWindow({ size: new google.maps.Size(150, 50) });
 
-
+//Map is visible on page with one marker at initial position
 function initMap() {
     // Ashby and College 37.857, -122.2527
     map = new google.maps.Map(document.getElementById('map'), {
@@ -103,7 +102,15 @@ function initMap() {
         animation: google.maps.Animation.DROP
     });
 
-}
+};
+//InfoWindow
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+
+
+
+
 
 //    infowindow = new google.maps.InfoWindow();
 
