@@ -43,10 +43,26 @@ var initialLocations = [{
 
 
 //making location accessible with two properties
-var location = function(data) {
+var Location = function(data) {
     this.title = data.title;
     this.location = data.location;
 };
+
+//-----------------------------
+
+var map;
+
+var initialPosition = initialLocations[0].location;
+
+// //initialies map
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: initialPosition,
+            zoom: 13
+        })
+
+
+    }//end initMap
 
 
 
