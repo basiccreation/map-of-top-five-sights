@@ -40,3 +40,13 @@ var initialLocations = [{
         lng: 11.5638
     }
 }];
+
+
+//making location accessible with two properties
+var location = function(data) {
+    this.title = data.title;
+    this.location = data.location;
+};
+
+
+
