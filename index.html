@@ -7,7 +7,7 @@
     <meta name="description" content="App to find the nearest open coffeeshops at any time of day">
     <meta name="author" content="Pia Smith">
     <link rel="icon" href="img/favicon.ico">
-    <title>ROSKILDE'S TOP FIVE</title>
+    <title>ROSKILDE'S TOP FIVE SIGHTS</title>
     <!-- Bootstrap core CSS -->
 
     <link href="lib/bootstrap.min.css" rel="stylesheet">
@@ -19,13 +19,15 @@
     <!-- Header med link to Roskilde on Wikipedia -->
     <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="https://en.wikipedia.org/wiki/Roskilde">
-            <h1>ROSKILDE TOP 5</h1>
+            <h1>ROSKILDE MUST SEES</h1>
         </a>
     </div>
     <!-- list of locations -->
         <nav>
-            <p>Filter</p>
-            <ul data-bind="foreach:locationList">
+            <p>Filter
+                <input data-bind= "textInput: filter">
+            </p>
+            <ul data-bind="foreach:filteredLocations">
                 <li class="item" data-bind="text: title"></li>
             </ul>
         </nav>

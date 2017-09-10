@@ -1,7 +1,6 @@
 //Neighborhood Map
 "use strict";
 
-
 //Array of initial 5 locations that are set by default
 var initialLocations = [{
 
@@ -87,14 +86,40 @@ var ViewModel = function() {
         location.marker.addListener('click', function() {
                 populateInfoWindow(this,largeInfoWindow);
             });
-
+        //passes the latlong to the map
         bounds.extend(location.marker.position);
-
 
     });//end locationList foreach
 
-    //limit map are to marker positions
+    //limits map to marker positions
     map.fitBounds(bounds);
+
+
+//filter locations || knockmeout.net/2011/04/utility-functions-in-knockoutjs
+    this.filteredLocations = ko.computed(function() {
+
+        var filter = self.filter();
+        //if there's nothing in filter return list
+        if (!self.filter()) {
+            self.locationList().forEach(function(location) {
+                location.marker.setMap(map);
+            });
+            return self.locationList();
+        }
+        //else return items that start with text in filter input
+        else {
+            return ko.utils.arrayFilter(self.locationList(), function(loc) {
+                if (loc.title.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+                    loc.marker.setMap(map);
+                }
+                else {
+                    loc.marker.setMap(null);
+                }
+                return loc.title.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+            });
+        }
+    }, self);
+
 
     //sets first item to currentLocation
     this.currentLocation = ko.observable(this.locationList()[0]);
@@ -107,6 +132,23 @@ var ViewModel = function() {
 
 
 }//end viewmodel
+
+//-------------   Info Window   ----------------
+
+//populates infowindow || GoogleMap API
+function populateInfoWindow(marker, infowindow) {
+    if (infowindow.marker != marker) {
+        infowindow.marker = marker;
+        infowindow.setContent('<div><h3>' + marker.title + '</h3></div>');
+    }
+
+    infowindow.open(map, marker);
+
+    infowindow.addListener('closeclick', function() {
+            infowindow.close();
+            marker.setAnimation(null);
+    });
+}//end populateInfoWindow
 
 
 
