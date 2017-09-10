@@ -134,7 +134,6 @@ var ViewModel = function() {
 }//end viewmodel
 
 //-------------   Info Window   ----------------
-
 //populates infowindow || GoogleMap API
 function populateInfoWindow(marker, infowindow) {
     if (infowindow.marker != marker) {
