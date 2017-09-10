@@ -42,13 +42,25 @@ var initialLocations = [{
 }];
 
 
-//making location accessible with two properties
+//making locations accessible with two properties
 var Location = function(data) {
     this.title = data.title;
     this.location = data.location;
 };
 
-//-----------------------------
+
+//-------------   ViewModel   ----------------
+
+var ViewModel = function() {
+
+    var self = this;
+
+
+}//end viewmodel
+
+
+
+//-------------   Map   ----------------
 
 var map;
 
