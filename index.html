@@ -25,12 +25,12 @@
     <!-- list of locations -->
         <nav>
             <p>Filter</p>
-            <ul>
-                <li></li>
+            <ul data-bind="foreach:locationList">
+                <li class="item" data-bind="text: title"></li>
             </ul>
         </nav>
 
-    <!-- Map of Roskilde are -->
+    <!-- Map of Roskilde area -->
     <div id="map"></div>
 
 

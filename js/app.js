@@ -106,7 +106,7 @@ var initialPosition = initialLocations[0].location;
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: initialPosition,
-            zoom: 13
+            zoom: 19
         })
 //resizes map || GoogleMap API
     google.maps.event.addDomListener(window, "resize", function() {
