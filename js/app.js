@@ -54,15 +54,18 @@ var map;
 
 var initialPosition = initialLocations[0].location;
 
-// //initialies map
+//initializes map || GoogleMap API
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: initialPosition,
             zoom: 13
         })
-
+//resizes map || GoogleMap API
+google.maps.event.addDomListener(window, "resize", function() {
+    var center = map.getCenter();
+    google.maps.event.trigger(map, "resize");
+    map.setCenter(center);
+});
 
     }//end initMap
-
-
 
