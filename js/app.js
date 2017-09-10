@@ -61,11 +61,10 @@ var initialPosition = initialLocations[0].location;
             zoom: 13
         })
 //resizes map || GoogleMap API
-google.maps.event.addDomListener(window, "resize", function() {
-    var center = map.getCenter();
-    google.maps.event.trigger(map, "resize");
-    map.setCenter(center);
-});
-
-    }//end initMap
+    google.maps.event.addDomListener(window, "resize", function() {
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center);
+    });
+}//end initMap
 
