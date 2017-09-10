@@ -37,7 +37,7 @@ var initialLocations = [{
 }];
 
 
-//making locations accessible with two properties
+//makes locations accessible with two properties
 var Location = function(data) {
     this.title = data.title;
     this.location = data.location;
@@ -57,23 +57,23 @@ var ViewModel = function() {
     //filtered list
     this.filter = ko.observable();
 
-    //define info window
+    //defines info window
     var largeInfoWindow = new google.maps.InfoWindow();
 
-    //define bounds
+    //defines bounds
     var bounds = new google.maps.LatLngBounds();
 
-    //loop through initialLocations and adding to locationList
+    //loops through initialLocations and adding to locationList
     initialLocations.forEach(function(
         locationItem) {
         self.locationList.push(new Location(
             locationItem));
     });//end initialLocations foreach
 
-    //loop through locationlist and set marker
+    //loops through locationlist and sets marker
     self.locationList().forEach(function(location) {
 
-        // define the marker
+        // defines  marker
         var marker = new google.maps.Marker({
             map: map,
             position: location.location,
@@ -83,6 +83,11 @@ var ViewModel = function() {
 
         location.marker = marker;
 
+        //opens infowindow when clicks marker
+        location.marker.addListener('click', function() {
+                populateInfoWindow(this,largeInfoWindow);
+            });
+
         bounds.extend(location.marker.position);
 
 
@@ -90,6 +95,15 @@ var ViewModel = function() {
 
     //limit map are to marker positions
     map.fitBounds(bounds);
+
+    //sets first item to currentLocation
+    this.currentLocation = ko.observable(this.locationList()[0]);
+
+    //set clicked location to current location
+    this.setLocation = function(clickedLocation) {
+        populateInfoWindow(clickedLocation.marker, largeInfoWindow);
+        self.currentLocation(clickedLocation);
+    };
 
 
 }//end viewmodel
