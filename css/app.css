@@ -100,3 +100,9 @@ nav.open {
     -webkit-transform: translate(0, 0);
     transform: translate(0, 0);
 }
+
+@media screen and (max-width: 250px) {
+  h1 {
+    font-size: 1.5em;
+  }
+}
