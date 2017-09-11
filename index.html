@@ -8,45 +8,38 @@
     <meta name="author" content="Pia Smith">
     <link rel="icon" href="img/favicon.ico">
     <title>ROSKILDE'S TOP FIVE SIGHTS</title>
-
     <!-- Bootstrap and core CSS -->
     <link href="lib/bootstrap.min.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Header med link to Roskilde on Wikipedia -->
+    <!-- header med link to Roskilde on Wikipedia -->
     <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="https://en.wikipedia.org/wiki/Roskilde">
             <h1>ROSKILDE MUST SEES</h1>
         </a>
     </div>
-
-        <!-- open and closes list of locations -->
+    <!-- open and closes list of locations -->
     <div class="main">
-    <button>
-        <a id="menu" data-bind="click: openMenu" href="#">
+        <button>
+            <a id="menu" data-bind="click: openMenu" href="#">
         <i class="fa fa-filter fa-1x" aria-hidden="true"></i>
         <span>FILTER</span>
         </a>
         </button>
     </div>
-
     <!-- list of locations -->
     <nav id="list-panel" class="list-view">
         <p class="filter">
             <input placeholder="Filter list" data-bind="textInput: filter">
         </p>
         <ul data-bind="foreach: filteredLocations">
-            <li class="item" data-bind="text: title"></li>
+            <li class="item" data-bind="text: title, click: $parent.setLocation"></li>
         </ul>
     </nav>
-
-
-
-    <!-- Map of Roskilde area -->
+    <!-- map of Roskilde area -->
     <div id="map"></div>
-
     <!-- JavaScript============================== -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
