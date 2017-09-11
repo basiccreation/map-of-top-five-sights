@@ -1,5 +1,3 @@
-/* Makes the  page fill the window. */
-
 html,
 body {
     height: 100%;
@@ -7,24 +5,42 @@ body {
     padding: 0;
 }
 
-
-/*  Map  */
-
-#map {
-    height: 100%;
-    width: 100%;
+/*sets the width and moves the nav off screen*/
+nav {
+    width: 210px;
     position: absolute;
-    top: 70px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    z-index: -1;
+    -webkit-transform: translate(-210px, 0);
+    transform: translate(-210px, 0);
+    transition: transform 0.3s ease;
+    z-index: 5;
 
 }
 
+/*moves the nav on screen*/
+nav.open {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+    z-index: 5;
+
+}
+
+/*filter*/
+.filter {
+    display: flex;
+}
+
+input {
+    width: 210px;
+    margin: 10px;
+}
+
+.fa {
+    color: #000000;
+    margin: 10px;
+
+}
 
 /*  Location list  */
-
 ul {
     list-style-type: none;
     padding: 0;
@@ -46,63 +62,40 @@ li:nth-child(odd) {
     background-color: #fcfcfc;
 }
 
-/*filter*/
-.filter {
-    display: flex;
-}
-
-input {
-  width: 210px;
-  margin: 10px;
-}
-
-.fa {
-    color: #000;
-    margin: 10px;
-}
-
-.menu span{
-      font-family: sans-serif;
-}
+/*main*/
 .main {
-    z-index: 10;
     position: relative;
     overflow: hidden;
     height: 50px;
-    color: #000;
+    color: #000000;
+    width: 210px;
     margin: 10px;
+    z-index: 4;
 }
 
-.mb-4 {
-    margin-bottom: 2.5rem!important;
-}
 .main button {
-  width: 210px;
-  margin-top: 10px;
+    width: 210px;
+    margin-top: 10px;
 }
 
 .main a {
-  color: #000;
-  text-decoration: none;
+    color: #000000;
+    text-decoration: none;
 }
 
-/*sets the width and moves the nav off screen*/
-nav {
-    width: 210px;
+/*  Map  */
+#map {
+    height: 100%;
+    width: 100%;
     position: absolute;
-    -webkit-transform: translate(-210px, 0);
-    transform: translate(-210px, 0);
-    transition: transform 0.3s ease;
-}
-
-/*moves the nav on screen*/
-nav.open {
-    -webkit-transform: translate(0, 0);
-    transform: translate(0, 0);
+    top: 70px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
 }
 
 @media screen and (max-width: 500px) {
-  h1 {
-    font-size: 1.5em;
-  }
+    h1 {
+        font-size: 1.5em;
+    }
 }

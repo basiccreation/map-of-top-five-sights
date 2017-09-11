@@ -67,7 +67,7 @@ var ViewModel = function() {
         locationItem) {
         self.locationList.push(new Location(
             locationItem));
-    });//end initialLocations foreach
+    }); //end initialLocations foreach
 
     //loops through locationlist and sets marker
     self.locationList().forEach(function(location) {
@@ -78,24 +78,24 @@ var ViewModel = function() {
             position: location.location,
             title: location.title,
             animation: google.maps.Animation.DROP
-        });//end marker
+        }); //end marker
 
         location.marker = marker;
 
         //opens infowindow when clicks marker
         location.marker.addListener('click', function() {
-                populateInfoWindow(this,largeInfoWindow);
-            });
+            populateInfoWindow(this, largeInfoWindow);
+        });
         //passes the latlong to the map
         bounds.extend(location.marker.position);
 
-    });//end locationList foreach
+    }); //end locationList foreach
 
     //limits map to marker positions
     map.fitBounds(bounds);
 
 
-//filter locations || knockmeout.net/2011/04/utility-functions-in-knockoutjs
+    //filter locations || knockmeout.net/2011/04/utility-functions-in-knockoutjs
     this.filteredLocations = ko.computed(function() {
 
         var filter = self.filter();
@@ -111,8 +111,7 @@ var ViewModel = function() {
             return ko.utils.arrayFilter(self.locationList(), function(loc) {
                 if (loc.title.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
                     loc.marker.setMap(map);
-                }
-                else {
+                } else {
                     loc.marker.setMap(null);
                 }
                 return loc.title.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
@@ -131,7 +130,7 @@ var ViewModel = function() {
     };
 
 
-}//end viewmodel
+} //end viewmodel
 
 //-------------   Info Window   ----------------
 //populates infowindow || GoogleMap API
@@ -144,10 +143,10 @@ function populateInfoWindow(marker, infowindow) {
     infowindow.open(map, marker);
 
     infowindow.addListener('closeclick', function() {
-            infowindow.close();
-            marker.setAnimation(null);
+        infowindow.close();
+        marker.setAnimation(null);
     });
-}//end populateInfoWindow
+} //end populateInfoWindow
 
 
 
@@ -158,20 +157,21 @@ var map;
 var initialPosition = initialLocations[0].location;
 
 //initializes map || GoogleMap API
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: initialPosition,
-            zoom: 19
-        })
-//resizes map || GoogleMap API
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: initialPosition,
+        zoom: 19
+    })
+    //resizes map || GoogleMap API
     google.maps.event.addDomListener(window, "resize", function() {
         var center = map.getCenter();
         google.maps.event.trigger(map, "resize");
         map.setCenter(center);
     });
 
+
     ko.applyBindings(new ViewModel());
-}//end initMap
+} //end initMap
 
 //-------------   Hamburger / Search Menu   ----------------
 
