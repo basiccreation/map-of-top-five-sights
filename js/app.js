@@ -173,3 +173,16 @@ var initialPosition = initialLocations[0].location;
     ko.applyBindings(new ViewModel());
 }//end initMap
 
+//-------------   Hamburger / Search Menu   ----------------
+
+//Collapsible menu || Udacity: Responsive Web Design
+
+var main = document.querySelector('.main');
+var listpanel = document.querySelector('#list-panel');
+
+//when the menu icon is clicked, the filter menu slides in
+//and the map/menu shift to the right
+this.openMenu = function() {
+    listpanel.classList.toggle('open');
+  //  main.classList.toggle('moveRight');
+};

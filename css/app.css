@@ -1,33 +1,102 @@
-
 /* Makes the  page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
 /*  Map  */
 
-      #map {
-        height: 100%;
-        width:100%;
-      }
+#map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 70px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: -1;
+
+}
+
 
 /*  Location list  */
 
-      ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        width: 210px;
-        overflow-y: scroll;
-      }
-      li {
-        background-color: #f1f1f1;
-        padding: 10px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-      li:nth-child(odd) {
-        background-color: #fcfcfc;
-      }
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 210px;
+    overflow-y: scroll;
+}
+
+li {
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin-left: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+li:nth-child(odd) {
+    background-color: #fcfcfc;
+}
+
+/*filter*/
+.filter {
+    display: flex;
+}
+
+input {
+  width: 210px;
+  margin: 10px;
+}
+
+.fa {
+    color: #000;
+    margin: 10px;
+}
+
+.menu span{
+      font-family: sans-serif;
+}
+.main {
+    z-index: 10;
+    position: relative;
+    overflow: hidden;
+    height: 50px;
+    color: #000;
+    margin: 10px;
+}
+
+.mb-4 {
+    margin-bottom: 2.5rem!important;
+}
+.main button {
+  width: 210px;
+  margin-top: 10px;
+}
+
+.main a {
+  color: #000;
+  text-decoration: none;
+}
+
+/*sets the width and moves the nav off screen*/
+nav {
+    width: 210px;
+    position: absolute;
+    -webkit-transform: translate(-210px, 0);
+    transform: translate(-210px, 0);
+    transition: transform 0.3s ease;
+}
+
+/*moves the nav on screen*/
+nav.open {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
