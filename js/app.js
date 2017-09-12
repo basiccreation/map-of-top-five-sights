@@ -138,28 +138,29 @@ function populateInfoWindow(marker, infowindow) {
     if (infowindow.marker != marker) {
         infowindow.marker = marker;
 
-  //Wikipedia API - MovePlanner Project
+        //Wikipedia API - MovePlanner Project
         var searchterm = marker.title;
-  //      var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search='
-    //                + searchterm.replace(" ", "%20")
-      //              + '&format=json&callback=wikiCallback';
-var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&callback=wikiCallback&srsearch='
-            + searchterm.replace(" ", "%20");
+        //      var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search='
+        //                  + searchterm.replace(" ", "%20")
+        //                  + '&format=json&callback=wikiCallback';
 
-                $.ajax({
-                    url: wikiUrl,
-                    dataType: 'jsonp'
-                    }).done(function(response) {
+        var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&callback=wikiCallback&srsearch=' +
+            searchterm.replace(" ", "%20");
+
+        $.ajax({
+            url: wikiUrl,
+            dataType: 'jsonp'
+        }).done(function(response) {
             var result = response.query.search;
 
- var url = 'https://en.wikipedia.org/wiki/'
-            + searchterm.replace(" ", "_");
-                infowindow.setContent(
-                    '<div>'
-                        +'<h2>' + result[0].title  + '</h2>'
-                        +'<p>' + result[0].snippet + '</p>'
-                        +'<p><a href=' + url + '>Click to read more on Wikipedia</a></p>'
-                        + '</div>');
+            var dourl = 'https://en.wikipedia.org/wiki/' +
+                searchterm.replace(" ", "_");
+            infowindow.setContent(
+                '<div>' +
+                '<h2>' + result[0].title + '</h2>' +
+                '<p>' + result[0].snippet + '</p>' +
+                '<p><a href = "' + dourl + '">Click to read more on Wikipedia</a></p>' +
+                '</div>');
 
         }); //end .done
 
