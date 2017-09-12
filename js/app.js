@@ -137,6 +137,13 @@ var ViewModel = function() {
 function populateInfoWindow(marker, infowindow) {
     if (infowindow.marker != marker) {
         infowindow.marker = marker;
+
+  //Wikipedia API - MovePlanner Project
+        var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search='
+                    + marker.title
+                    + '&format=json&callback=wikiCallback';
+
+
         infowindow.setContent('<div><h3>' + marker.title + '</h3></div>');
     }
 
