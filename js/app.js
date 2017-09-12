@@ -5,30 +5,39 @@
 var initialLocations = [{
 
     title: 'Roskilde Cathedral',
+        website: 'http://www.roskildedomkirke.dk/',
+
     location: {
         lat: 55.6426,
         lng: 12.0804
     }
 }, {
     title: 'Roskilde Festival',
+        website: 'http://www.roskilde-festival.dk/',
+
     location: {
         lat: 55.619664188,
         lng: 12.072666376
     }
 }, {
     title: 'Viking Ship Museum (Roskilde)',
+        website: 'http://www.vikingeskibsmuseet.dk/en/',
+
     location: {
         lat: 55.6508,
         lng: 12.0805
     }
 }, {
     title: 'Risø DTU National Laboratory for Sustainable Energy',
+        website: 'http://www.dtu.dk/english/about/campuses/dtu-risoe-campus/brief-history-of-risoe',
+
     location: {
         lat: 55.6945,
         lng: 12.1021
     }
 }, {
     title: 'Land of Legends (Sagnlandet Lejre)',
+    website: 'http://www.sagnlandet.dk/en/',
     location: {
         lat: 55.6160,
         lng: 11.9425
@@ -36,10 +45,11 @@ var initialLocations = [{
 }];
 
 
-//makes locations accessible with two properties
+//makes locations accessible with three properties
 var Location = function(data) {
     this.title = data.title;
     this.location = data.location;
+    this.website = data.website;
 };
 
 
@@ -76,6 +86,7 @@ var ViewModel = function() {
         var marker = new google.maps.Marker({
             map: map,
             position: location.location,
+            website: location.website,
             title: location.title,
             animation: google.maps.Animation.DROP
         }); //end marker
@@ -153,13 +164,14 @@ function populateInfoWindow(marker, infowindow) {
         }).done(function(response) {
             var result = response.query.search;
 
-            var dourl = 'https://en.wikipedia.org/wiki/' +
-                searchterm.replace(" ", "_");
-            infowindow.setContent(
+            var url = 'https://en.wikipedia.org/wiki/'
+                + searchterm.replace(" ", "_");
+
+                infowindow.setContent(
                 '<div>' +
                 '<h2>' + result[0].title + '</h2>' +
-                '<p>' + result[0].snippet + '</p>' +
-                '<p><a href = "' + dourl + '">Click to read more on Wikipedia</a></p>' +
+                '<p>The <a href = "' + url + '">Wikipedia article</a> about ' + result[0].title + ' contains ' + result[0].wordcount + ' words.</p>' +
+                '<p>Website for <a href = "' + marker.website + '">' + result[0].title  +'</a></p>'+
                 '</div>');
 
         }); //end .done
