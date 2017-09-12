@@ -16,19 +16,19 @@ var initialLocations = [{
         lng: 12.072666376
     }
 }, {
-    title: 'Viking Ship Museum',
+    title: 'Viking Ship Museum (Roskilde)',
     location: {
         lat: 55.6508,
         lng: 12.0805
     }
 }, {
-    title: 'Risø',
+    title: 'Risø DTU National Laboratory for Sustainable Energy',
     location: {
         lat: 55.6945,
         lng: 12.1021
     }
 }, {
-    title: 'Land of Legends -- Lejre',
+    title: 'Land of Legends (Sagnlandet Lejre)',
     location: {
         lat: 55.6160,
         lng: 11.9425
@@ -130,7 +130,7 @@ var ViewModel = function() {
     };
 
 
-} //end viewmodel
+}; //end viewmodel
 
 //-------------   Info Window   ----------------
 //populates infowindow || GoogleMap API
@@ -139,21 +139,38 @@ function populateInfoWindow(marker, infowindow) {
         infowindow.marker = marker;
 
   //Wikipedia API - MovePlanner Project
-        var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search='
-                    + marker.title
-                    + '&format=json&callback=wikiCallback';
+        var searchterm = marker.title;
+  //      var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search='
+    //                + searchterm.replace(" ", "%20")
+      //              + '&format=json&callback=wikiCallback';
+var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&callback=wikiCallback&srsearch='
+            + searchterm.replace(" ", "%20");
 
+                $.ajax({
+                    url: wikiUrl,
+                    dataType: 'jsonp'
+                    }).done(function(response) {
+            var result = response.query.search;
 
-        infowindow.setContent('<div><h3>' + marker.title + '</h3></div>');
+ var url = 'https://en.wikipedia.org/wiki/'
+            + searchterm.replace(" ", "_");
+                infowindow.setContent(
+                    '<div>'
+                        +'<h2>' + result[0].title  + '</h2>'
+                        +'<p>' + result[0].snippet + '</p>'
+                        +'<p><a href=' + url + '>Click to read more on Wikipedia</a></p>'
+                        + '</div>');
+
+        }); //end .done
+
+        infowindow.open(map, marker);
+
+        infowindow.addListener('closeclick', function() {
+            infowindow.close();
+            marker.setAnimation(null);
+        }); // end infowindow.addlistener
     }
-
-    infowindow.open(map, marker);
-
-    infowindow.addListener('closeclick', function() {
-        infowindow.close();
-        marker.setAnimation(null);
-    });
-} //end populateInfoWindow
+}; //end populateInfoWindow
 
 
 
