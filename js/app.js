@@ -196,7 +196,7 @@ function populateInfoWindow(marker, infowindow) {
 setTimeout(function() {
   if(!window.google || !window.google.maps) {
     $('.main').html('<style>button {display:none;}</style>');
-    $('#errormessage').html('<p class = "errormessage">Failed to load Google Maps, please try again later.</p> <img class = "errormessage" alt = "detective looking for clues" src = "img/detective.jpg">');
+    $('#errormessage').html('<p class = "errormessage">Failed to find Google Maps, looking for clues. Please try again later.</p> <img class = "errormessage" alt = "detective looking for clues" src = "img/detective.jpg">');
 }
 }, 5000);
 
