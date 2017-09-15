@@ -221,3 +221,11 @@ var listpanel = document.querySelector('#list-panel');
 this.openMenu = function() {
     listpanel.classList.toggle('open');
 };
+
+
+//ERROR: google map not loading
+function googleErrorHandler() {
+    $('#map').html(
+        '<img class = "errormessage" alt = "detective looking for clues" src = "../img/detective">        <p class = "errormessage">Failed to retrieve Google Maps resources, please try again later.</hp>'
+    );
+}
