@@ -176,6 +176,8 @@ function populateInfoWindow(marker, infowindow) {
 
         }); //end .done
 
+
+
         infowindow.open(map, marker);
 
         infowindow.addListener('closeclick', function() {
@@ -188,6 +190,15 @@ function populateInfoWindow(marker, infowindow) {
 
 
 //-------------   Map   ----------------
+
+//ERROR: google map not loading || https://stackoverflow.com/questions/14687237/google-maps-api-async-loading
+
+setTimeout(function() {
+  if(!window.google || !window.google.maps) {
+    $('.main').html('<style>button {display:none;}</style>');
+    $('#errormessage').html('<p class = "errormessage">Failed to load Google Maps, please try again later.</p> <img class = "errormessage" alt = "detective looking for clues" src = "img/detective.jpg">');
+}
+}, 5000);
 
 var map;
 
@@ -223,9 +234,3 @@ this.openMenu = function() {
 };
 
 
-//ERROR: google map not loading
-function googleErrorHandler() {
-    $('#map').html(
-        '<img class = "errormessage" alt = "detective looking for clues" src = "../img/detective">        <p class = "errormessage">Failed to retrieve Google Maps resources, please try again later.</hp>'
-    );
-}
