@@ -155,7 +155,7 @@ function populateInfoWindow(marker, infowindow) {
         //                  + searchterm.replace(" ", "%20")
         //                  + '&format=json&callback=wikiCallback';
 
-        var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&callback=wikiCallback&srsearch9=' +
+        var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&callback=wikiCallback&srsearch=' +
             searchterm.replace(" ", "%20");
 
 //ERROR: wikipedia not loading || Udacity: Error Handling with JSON P video
