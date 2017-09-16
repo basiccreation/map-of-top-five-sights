@@ -155,15 +155,15 @@ function populateInfoWindow(marker, infowindow) {
         //                  + searchterm.replace(" ", "%20")
         //                  + '&format=json&callback=wikiCallback';
 
-        var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&callback=wikiCallback&srsearch=' +
+        var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&callback=wikiCallback&srsearch9=' +
             searchterm.replace(" ", "%20");
 
 //ERROR: wikipedia not loading || Udacity: Error Handling with JSON P video
         var wikiRequestTimeout = setTimeout(function() {
                 infowindow.setContent(
-                "<div>Couldn't connect to Wikipedia. Currently no details available for "
-                + marker.title + '</div>');
-        }, 9000);
+                "<h5>... waiting for a response from Wikipedia.<br>Currently no details for "
+                + marker.title + '</h5>');
+        }, 5000);
 
         $.ajax({
             url: wikiUrl,
@@ -175,11 +175,10 @@ function populateInfoWindow(marker, infowindow) {
                 + searchterm.replace(" ", "_");
 
                 infowindow.setContent(
-                '<div>' +
                 '<h2>' + result[0].title + '</h2>' +
                 '<p>The <a href = "' + url + '">Wikipedia article</a> about ' + result[0].title + ' contains ' + result[0].wordcount + ' words.</p>' +
-                '<p>Website for <a href = "' + marker.website + '">' + result[0].title  +'</a></p>'+
-                '</div>');
+                '<p>Website for <a href = "' + marker.website + '">' + result[0].title  +'</a></p>'
+                );
 
                 clearTimeout(wikiRequestTimeout)
 
