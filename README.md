@@ -1,16 +1,20 @@
-To do list
-+ Julia Morgan introduction (https://www.bluffton.edu/homepages/facstaff/sullivanm/jmberkhses/intro.html)
-- Map with min five house locations (Google Maps)
-    - API
-    - List of buildings (https://www.bluffton.edu/homepages/facstaff/sullivanm/jmindex/genericindex.html)
-- Link to wikipedia links for the houses (Wikipedia)
-    API
-- Links to books about Julia (Google Books)
-    - API
+Roskilde's Top sights
 
+The app will show the user a map of five or more sights in Roskilde and surround area.
 
-help with filter
-    http://jsfiddle.net/pips/n5b52kr1/15/
+Getting Started
+Load https://basiccreation.github.io/reimagined-fortnight/ in a browser.
 
-help with multiple views
-    https://groups.google.com/forum/#!searchin/knockoutjs/multiple$20viewmodels$20%7Csort:relevance/knockoutjs/s7RdSCixyiI/5yW77jjmX2UJ
+Prerequisites
+This app requires internet access.
+
+Instructions
+by clicking the markers, the user will get information about the various site.
+
+by pressing the filter button, the user can filter the sites by entering something in the input box.
+
+Authors
+Pia Smith
+
+License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
