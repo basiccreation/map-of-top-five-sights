@@ -158,6 +158,13 @@ function populateInfoWindow(marker, infowindow) {
         var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&callback=wikiCallback&srsearch=' +
             searchterm.replace(" ", "%20");
 
+//ERROR: wikipedia not loading || Udacity: Error Handling with JSON P video
+        var wikiRequestTimeout = setTimeout(function() {
+                infowindow.setContent(
+                "<div>Couldn't connect to Wikipedia. Currently no details available for "
+                + marker.title + '</div>');
+        }, 9000);
+
         $.ajax({
             url: wikiUrl,
             dataType: 'jsonp',
@@ -173,6 +180,9 @@ function populateInfoWindow(marker, infowindow) {
                 '<p>The <a href = "' + url + '">Wikipedia article</a> about ' + result[0].title + ' contains ' + result[0].wordcount + ' words.</p>' +
                 '<p>Website for <a href = "' + marker.website + '">' + result[0].title  +'</a></p>'+
                 '</div>');
+
+                clearTimeout(wikiRequestTimeout)
+
             }  // end success method
          }) // end ajax request
 
