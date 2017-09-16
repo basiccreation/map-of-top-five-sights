@@ -1,25 +1,25 @@
-Roskilde's Top sights
+#Roskilde's Top sights
 
 The app will show the user a map of five or more sights in Roskilde and surround area.
 
-Getting Started
+##Getting Started
 
 Load https://basiccreation.github.io/reimagined-fortnight/ in a browser.
 
-Prerequisites
+##Prerequisites
 
 This app requires internet access.
 
-Instructions
+##Instructions
 
 - by clicking the markers, the user will get information about the various site.
 
 - by pressing the filter button, the user can filter the sites by entering something in the input box.
 
-Authors
+###Authors
 
 Pia Smith
 
-License
+###License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
