@@ -173,8 +173,8 @@ function populateInfoWindow(marker, infowindow) {
                 '<p>The <a href = "' + url + '">Wikipedia article</a> about ' + result[0].title + ' contains ' + result[0].wordcount + ' words.</p>' +
                 '<p>Website for <a href = "' + marker.website + '">' + result[0].title  +'</a></p>'+
                 '</div>');
-}
-}) // end success
+            }  // end success method
+         }) // end ajax request
 
 
 
