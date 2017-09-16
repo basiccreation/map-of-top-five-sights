@@ -160,8 +160,8 @@ function populateInfoWindow(marker, infowindow) {
 
         $.ajax({
             url: wikiUrl,
-            dataType: 'jsonp'
-        }).done(function(response) {
+            dataType: 'jsonp',
+            success: function(response) {
             var result = response.query.search;
 
             var url = 'https://en.wikipedia.org/wiki/'
@@ -173,8 +173,8 @@ function populateInfoWindow(marker, infowindow) {
                 '<p>The <a href = "' + url + '">Wikipedia article</a> about ' + result[0].title + ' contains ' + result[0].wordcount + ' words.</p>' +
                 '<p>Website for <a href = "' + marker.website + '">' + result[0].title  +'</a></p>'+
                 '</div>');
-
-        }); //end .done
+}
+}) // end success
 
 
 
@@ -192,7 +192,6 @@ function populateInfoWindow(marker, infowindow) {
 //-------------   Map   ----------------
 
 //ERROR: google map not loading || https://stackoverflow.com/questions/14687237/google-maps-api-async-loading
-
 setTimeout(function() {
   if(!window.google || !window.google.maps) {
     $('.main').html('<style>button {display:none;}</style>');
