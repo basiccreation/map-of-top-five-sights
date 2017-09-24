@@ -1,14 +1,14 @@
-#Roskilde's Top sights
+#Roskilde's Top Sights
 
-The app will show the user a map of five or more sights in Roskilde and surround area.
-
-##Getting Started
-
-Load https://basiccreation.github.io/reimagined-fortnight/ in a browser.
+The app will show the user a map of five or more sights in Roskilde and surrounding area.
 
 ##Prerequisites
 
 This app requires internet access.
+
+##Getting Started
+
+Load index.html file from this folder in a browser of your choice.
 
 ##Instructions
 
@@ -16,7 +16,7 @@ This app requires internet access.
 
 - by pressing the filter button, the user can filter the sites by entering something in the input box.
 
-###Authors
+###Author
 
 Pia Smith
 
