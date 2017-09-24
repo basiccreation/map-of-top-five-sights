@@ -5,8 +5,7 @@
 }());
 
 var ko,
-    google,
-    $;
+    google;
 
 //Array of initial 5 locations that are set by default
 var initialLocations = [{
