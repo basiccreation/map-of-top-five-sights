@@ -1,5 +1,12 @@
 //Neighborhood Map
-"use strict";
+(function () {
+   "use strict";
+   // this function is strict...
+}());
+
+var ko,
+    google,
+    $;
 
 //Array of initial 5 locations that are set by default
 var initialLocations = [{
@@ -160,8 +167,7 @@ function populateInfoWindow(marker, infowindow) {
 //ERROR: wikipedia not loading || Udacity: Error Handling with JSON P video
         var wikiRequestTimeout = setTimeout(function () {
             infowindow.setContent(
-                "<h5>... waiting for a response from Wikipedia.<br>Currently no details for "
-                + marker.title + "</h5>"
+                "<h5>... waiting for a response from Wikipedia.<br>Currently no details for " + marker.title + "</h5>"
             );
         }, 5000);
 
@@ -171,8 +177,7 @@ function populateInfoWindow(marker, infowindow) {
             success: function (response) {
                 var result = response.query.search;
 
-                var url = "https://en.wikipedia.org/wiki/"
-                        + searchterm.replace(" ", "_");
+                var url = "https://en.wikipedia.org/wiki/" + searchterm.replace(" ", "_");
 
                 infowindow.setContent(
                     "<h2>" + result[0].title + "</h2>" +
@@ -237,7 +242,8 @@ var main = document.querySelector(".main");
 var listpanel = document.querySelector("#list-panel");
 
 //when filter icon is clicked, menu slides out and in
-this.openMenu = function () {
+var that = this;
+that.openMenu = function () {
     listpanel.classList.toggle("open");
 };
 
