@@ -5,7 +5,9 @@ body {
     padding: 0;
 }
 
+
 /*sets the width and moves the nav off screen*/
+
 nav {
     width: 210px;
     position: absolute;
@@ -13,18 +15,20 @@ nav {
     transform: translate(-210px, 0);
     transition: transform 0.3s ease;
     z-index: 5;
-
 }
 
+
 /*moves the nav on screen*/
+
 nav.open {
     -webkit-transform: translate(0, 0);
     transform: translate(0, 0);
     z-index: 5;
-
 }
 
+
 /*filter*/
+
 .filter {
     display: flex;
 }
@@ -37,10 +41,11 @@ input {
 .fa {
     color: #000000;
     margin: 10px;
-
 }
 
+
 /*  Location list  */
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -62,7 +67,9 @@ li:nth-child(odd) {
     background-color: #fcfcfc;
 }
 
+
 /*main*/
+
 .main {
     position: relative;
     overflow: hidden;
@@ -83,7 +90,9 @@ li:nth-child(odd) {
     text-decoration: none;
 }
 
+
 /*  Map  */
+
 #map {
     height: 100%;
     width: 100%;
@@ -94,20 +103,18 @@ li:nth-child(odd) {
     left: 0px;
 }
 
-#errormessage {
-
-}
+#errormessage {}
 
 #errormessage img {
     height: :100%;
     width: 100%;
-    z-index:1;
+    z-index: 1;
 }
 
 #errormessage p {
     font-weight: bolder;
     font-size: 1.5em;
-    padding:10%;
+    padding: 10%;
     z-index: 2;
 }
 
@@ -122,9 +129,10 @@ li:nth-child(odd) {
 
 @media screen and (min-width: 500px) {
     #errormessage img {
-  position: fixed; /* or absolute */
-  top: 40%;
-  left: 40%;
-  z-index:1;
+        position: fixed;
+        /* or absolute */
+        top: 40%;
+        left: 40%;
+        z-index: 1;
     }
 }
