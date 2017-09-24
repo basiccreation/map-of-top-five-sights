@@ -93,8 +93,20 @@ var ViewModel = function () {
             position: location.location,
             website: location.website,
             title: location.title,
-            animation: google.maps.Animation.DROP
+            animation: google.maps.Animation.DROP,
         }); //end marker
+
+        //marker bounces when clicked || Google Map API
+        function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+        }
+
+        marker.addListener('click', toggleBounce);
+
 
         location.marker = marker;
 
