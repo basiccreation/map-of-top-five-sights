@@ -101,10 +101,7 @@ var ViewModel = function () {
         //opens infowindow when marker's clicked and bounces marker
         location.marker.addListener("click", function () {
             populateInfoWindow(this, largeInfoWindow);
-           this.setAnimation(google.maps.Animation.BOUNCE);
-            setTimeout(function() {
-            location.marker.setAnimation(null);
-            }, 2100);
+            toggleBounce(this);
         });
         //passes the latlong to the map
         bounds.extend(location.marker.position);
@@ -138,12 +135,30 @@ var ViewModel = function () {
         }
     }, self);
 
+    //bounce when location is clicked
+    function toggleBounce(marker) {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            for (var i = 0; i < self.locationList()
+                .length; i++) {
+                var mark = self.locationList()[i].marker;
+                if (mark.getAnimation() !== null) {
+                    mark.setAnimation(null);
+                }
+            }
+            marker.setAnimation(google.maps.Animation
+                .BOUNCE);
+        }
+    }
+
 
     //sets first item to currentLocation
     this.currentLocation = ko.observable(this.locationList()[0]);
 
     //set clicked location to current location
     this.setLocation = function (clickedLocation) {
+        toggleBounce(clickedLocation.marker)
         populateInfoWindow(clickedLocation.marker, largeInfoWindow);
         self.currentLocation(clickedLocation);
         clickedLocation.marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -200,6 +215,7 @@ function populateInfoWindow(marker, infowindow) {
         }); // end infowindow.addlistener
     }
 } //end populateInfoWindow
+
 
 
 
