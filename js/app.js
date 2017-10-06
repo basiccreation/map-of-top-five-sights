@@ -96,23 +96,15 @@ var ViewModel = function () {
             animation: google.maps.Animation.DROP,
         }); //end marker
 
-        //marker bounces when clicked || Google Map API
-        function toggleBounce() {
-        if (marker.getAnimation() !== null) {
-          marker.setAnimation(null);
-        } else {
-          marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
-        }
-
-        marker.addListener('click', toggleBounce);
-
-
         location.marker = marker;
 
-        //opens infowindow when clicks marker
+        //opens infowindow when marker's clicked and bounces marker
         location.marker.addListener("click", function () {
             populateInfoWindow(this, largeInfoWindow);
+           this.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(function() {
+            location.marker.setAnimation(null);
+            }, 2100);
         });
         //passes the latlong to the map
         bounds.extend(location.marker.position);
@@ -121,7 +113,6 @@ var ViewModel = function () {
 
     //limits map to marker positions
     map.fitBounds(bounds);
-
 
     //filter locations || knockmeout.net/2011/04/utility-functions-in-knockoutjs
     this.filteredLocations = ko.computed(function () {
@@ -155,8 +146,8 @@ var ViewModel = function () {
     this.setLocation = function (clickedLocation) {
         populateInfoWindow(clickedLocation.marker, largeInfoWindow);
         self.currentLocation(clickedLocation);
+        clickedLocation.marker.setAnimation(google.maps.Animation.BOUNCE);
     };
-
 
 }; //end viewmodel
 
@@ -201,8 +192,6 @@ function populateInfoWindow(marker, infowindow) {
             }  // end success method
         }); // end ajax request
 
-
-
         infowindow.open(map, marker);
 
         infowindow.addListener("closeclick", function () {
@@ -211,6 +200,9 @@ function populateInfoWindow(marker, infowindow) {
         }); // end infowindow.addlistener
     }
 } //end populateInfoWindow
+
+
+
 
 
 
