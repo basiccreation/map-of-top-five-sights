@@ -224,13 +224,11 @@ function populateInfoWindow(marker, infowindow) {
 
 //-------------   Map   ----------------
 
-//ERROR: google map not loading || https://stackoverflow.com/questions/14687237/google-maps-api-async-loading
-setTimeout(function () {
-    if (!window.google || !window.google.maps) {
+//ERROR: google map not loading || W3Schools and MDN
+function googleMapNotLoading () {
     $(".main").html("<style>button {display:none;}</style>");
     $("#errormessage").html("<p class = 'errormessage'>Failed to load Google Maps, looking for clues. Please try again later.</p> <img class = 'errormessage' alt = 'detective looking for clues' src = 'img/detective.jpg'>");
-    }
-}, 5000);
+    };
 
 var map;
 
