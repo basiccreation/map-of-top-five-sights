@@ -158,7 +158,7 @@ var ViewModel = function () {
 
     //set clicked location to current location
     this.setLocation = function (clickedLocation) {
-        toggleBounce(clickedLocation.marker)
+        toggleBounce(clickedLocation.marker);
         populateInfoWindow(clickedLocation.marker, largeInfoWindow);
         self.currentLocation(clickedLocation);
         clickedLocation.marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -228,7 +228,7 @@ function populateInfoWindow(marker, infowindow) {
 function googleMapNotLoading () {
     $(".main").html("<style>button {display:none;}</style>");
     $("#errormessage").html("<p class = 'errormessage'>Failed to load Google Maps, looking for clues. Please try again later.</p> <img class = 'errormessage' alt = 'detective looking for clues' src = 'img/detective.jpg'>");
-    };
+    }
 
 var map;
 
