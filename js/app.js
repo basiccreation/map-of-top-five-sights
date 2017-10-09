@@ -1,7 +1,7 @@
 //Neighborhood Map
-(function () {
-   "use strict";
-   // this function is strict...
+(function() {
+    "use strict";
+    // this function is strict...
 }());
 
 var ko,
@@ -48,7 +48,7 @@ var initialLocations = [{
 
 
 //makes locations accessible with three properties
-var Location = function (data) {
+var Location = function(data) {
     this.title = data.title;
     this.location = data.location;
     this.website = data.website;
@@ -57,7 +57,7 @@ var Location = function (data) {
 
 //-------------   ViewModel   ----------------
 
-var ViewModel = function () {
+var ViewModel = function() {
 
     var self = this;
 
@@ -76,7 +76,7 @@ var ViewModel = function () {
     var bounds = new google.maps.LatLngBounds();
 
     //loops through initialLocations and adding to locationList
-    initialLocations.forEach(function (
+    initialLocations.forEach(function(
         locationItem
     ) {
         self.locationList.push(new Location(
@@ -85,7 +85,7 @@ var ViewModel = function () {
     }); //end initialLocations foreach
 
     //loops through locationlist and sets marker
-    self.locationList().forEach(function (location) {
+    self.locationList().forEach(function(location) {
 
         // defines  marker
         var marker = new google.maps.Marker({
@@ -99,7 +99,7 @@ var ViewModel = function () {
         location.marker = marker;
 
         //opens infowindow when marker's clicked and bounces marker
-        location.marker.addListener("click", function () {
+        location.marker.addListener("click", function() {
             populateInfoWindow(this, largeInfoWindow);
             toggleBounce(this);
         });
@@ -112,19 +112,19 @@ var ViewModel = function () {
     map.fitBounds(bounds);
 
     //filter locations || knockmeout.net/2011/04/utility-functions-in-knockoutjs
-    this.filteredLocations = ko.computed(function () {
+    this.filteredLocations = ko.computed(function() {
 
         var filter = self.filter();
         //if there's nothing in filter return list
         if (!self.filter()) {
-            self.locationList().forEach(function (location) {
+            self.locationList().forEach(function(location) {
                 location.marker.setMap(map);
             });
             return self.locationList();
-        //else return items that start with text in filter input
+            //else return items that start with text in filter input
 
         } else {
-            return ko.utils.arrayFilter(self.locationList(), function (loc) {
+            return ko.utils.arrayFilter(self.locationList(), function(loc) {
                 if (loc.title.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
                     loc.marker.setMap(map);
                 } else {
@@ -157,7 +157,7 @@ var ViewModel = function () {
     this.currentLocation = ko.observable(this.locationList()[0]);
 
     //set clicked location to current location
-    this.setLocation = function (clickedLocation) {
+    this.setLocation = function(clickedLocation) {
         toggleBounce(clickedLocation.marker);
         populateInfoWindow(clickedLocation.marker, largeInfoWindow);
         self.currentLocation(clickedLocation);
@@ -179,10 +179,10 @@ function populateInfoWindow(marker, infowindow) {
         //                  + '&format=json&callback=wikiCallback';
 
         var wikiUrl = "https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&callback=wikiCallback&srsearch=" +
-                searchterm.replace(" ", "%20");
+            searchterm.replace(" ", "%20");
 
-//ERROR: wikipedia not loading || Udacity: Error Handling with JSON P video
-        var wikiRequestTimeout = setTimeout(function () {
+        //ERROR: wikipedia not loading || Udacity: Error Handling with JSON P video
+        var wikiRequestTimeout = setTimeout(function() {
             infowindow.setContent(
                 "<h5>... waiting for a response from Wikipedia.<br>Currently no details for " + marker.title + "</h5>"
             );
@@ -191,7 +191,7 @@ function populateInfoWindow(marker, infowindow) {
         $.ajax({
             url: wikiUrl,
             dataType: "jsonp",
-            success: function (response) {
+            success: function(response) {
                 var result = response.query.search;
 
                 var url = "https://en.wikipedia.org/wiki/" + searchterm.replace(" ", "_");
@@ -204,12 +204,12 @@ function populateInfoWindow(marker, infowindow) {
 
                 clearTimeout(wikiRequestTimeout);
 
-            }  // end success method
+            } // end success method
         }); // end ajax request
 
         infowindow.open(map, marker);
 
-        infowindow.addListener("closeclick", function () {
+        infowindow.addListener("closeclick", function() {
             infowindow.close();
             marker.setAnimation(null);
         }); // end infowindow.addlistener
@@ -225,10 +225,10 @@ function populateInfoWindow(marker, infowindow) {
 //-------------   Map   ----------------
 
 //ERROR: google map not loading || W3Schools and MDN
-function googleMapNotLoading () {
+function googleMapNotLoading() {
     $(".main").html("<style>button {display:none;}</style>");
     $("#errormessage").html("<p class = 'errormessage'>Failed to load Google Maps, looking for clues. Please try again later.</p> <img class = 'errormessage' alt = 'detective looking for clues' src = 'img/detective.jpg'>");
-    }
+}
 
 var map;
 
@@ -241,7 +241,7 @@ function initMap() {
         zoom: 19
     });
     //resizes map || GoogleMap API
-    google.maps.event.addDomListener(window, "resize", function () {
+    google.maps.event.addDomListener(window, "resize", function() {
         var center = map.getCenter();
         google.maps.event.trigger(map, "resize");
         map.setCenter(center);
@@ -260,8 +260,6 @@ var listpanel = document.querySelector("#list-panel");
 
 //when filter icon is clicked, menu slides out and in
 var that = this;
-that.openMenu = function () {
+that.openMenu = function() {
     listpanel.classList.toggle("open");
 };
-
-
